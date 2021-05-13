@@ -4,9 +4,9 @@ import { nanoid } from "nanoid";
 import AWS from "aws-sdk";
 
 const S3 = new AWS.S3();
-const DynamoDB = new AWS.DynamoDB();
+const DynamoDB = new AWS.DynamoDB.DocumentClient();
 
-export const upload = async (req: Request, res: Response) => {
+export const add = async (req: Request, res: Response) => {
   try {
     if (!req.files) return res.status(400).json({ success: false, error: "Missing photo" });
 
@@ -30,16 +30,26 @@ export const upload = async (req: Request, res: Response) => {
     const dbParams = {
       TableName: "photo",
       Item: {
-        photoId: { S: filename },
-        name: { S: name },
-        author: { S: author },
+        photoId: filename,
+        name: name,
+        author: author,
       },
     };
-    await DynamoDB.putItem(dbParams).promise();
+
+    await DynamoDB.put(dbParams).promise();
 
     res.status(200).json({ success: true });
   } catch (error) {
-    console.log(error);
+    res.status(400).json({ success: false, error: error.message });
+  }
+};
+
+export const getAll = async (_req: Request, res: Response) => {
+  try {
+    const photos = await DynamoDB.scan({ TableName: "photo" }).promise();
+
+    res.status(200).json({ success: true, data: photos.Items });
+  } catch (error) {
     res.status(400).json({ success: false, error: error.message });
   }
 };

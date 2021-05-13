@@ -1,8 +1,9 @@
 import express from "express";
-import { upload } from "../controllers/photo";
+import { add, getAll } from "../controllers/photo";
 
 const router = express.Router();
 
-router.post("/", upload);
+router.post("/", add);
+router.get("/", getAll);
 
 export default router;
