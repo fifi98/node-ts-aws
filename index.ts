@@ -1,5 +1,10 @@
 import express, { Application } from "express";
 import fileUpload from "express-fileupload";
+import * as dotenv from "dotenv";
+import AWS from "aws-sdk";
+
+dotenv.config();
+AWS.config.region = process.env.AWS_REGION;
 
 import routes from "./routes";
 
