@@ -1,8 +1,11 @@
-import express from "express";
+import express, { Application } from "express";
+import fileUpload from "express-fileupload";
+
 import routes from "./routes";
 
-const server = express();
+const app: Application = express();
 
-server.use("/api", routes);
+app.use(fileUpload());
+app.use("/api", routes);
 
-server.listen(process.env.PORT || 8080, () => console.log(`Started on port ${process.env.PORT || 8080}`));
+app.listen(process.env.PORT || 8080, () => console.log(`Started on port ${process.env.PORT || 8080}`));
