@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "aws-sdk": "^2.906.0",
+    "dotenv": "^9.0.2",
     "express": "^4.17.1",
     "express-fileupload": "^1.2.1",
     "nanoid": "^3.1.23"
