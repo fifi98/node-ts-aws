@@ -26,7 +26,7 @@ export const add = async (req: Request, res: Response) => {
 
     await S3.upload(fileParams).promise();
 
-    // Store to database
+    // Store data to the database
     const dbParams = {
       TableName: "photo",
       Item: {
