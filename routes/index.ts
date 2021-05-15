@@ -1,8 +1,8 @@
 import express from "express";
-import photo from "./photo";
+import photos from "./photos";
 
 const router = express.Router();
 
-router.use("/photo", photo);
+router.use("/photos", photos);
 
 export default router;
