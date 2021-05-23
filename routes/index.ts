@@ -3,6 +3,6 @@ import photos from "./photos";
 
 const router = express.Router();
 
-router.use("/photos", photos);
+router.use("/photo", photos);
 
 export default router;
