@@ -13,7 +13,7 @@ export const add = async (req: Request, res: Response) => {
     const photo = req.files.photo as UploadedFile;
     const { name, author } = req.body;
 
-    const filename = nanoid();
+    const filename: string = nanoid();
 
     // Upload photo
     const fileParams = {
